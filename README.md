@@ -75,7 +75,6 @@ require_once 'vendor/autoload.php';
 $apiKey = 'YOUR SERVER KEY';
 $client = new Client();
 $client->setApiKey($apiKey);
-$client->injectHttpClient(new \GuzzleHttp\Client());
 
 $message = new Message();
 $message->addRecipient(new Topic('your-topic'));
