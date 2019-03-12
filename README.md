@@ -22,13 +22,13 @@ The recommended way of installing is using Composer.
 
 command line
 ```
-composer require paragraph1/php-fcm
+composer require guigpm/php-fcm
 ```
 
 composer.json
 ```
 "require": {
-    "paragraph1/php-fcm": "*"
+    "guigpm/php-fcm": "*"
 }
 ```
 
