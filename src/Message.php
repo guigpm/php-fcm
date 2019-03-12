@@ -1,4 +1,5 @@
 <?php
+
 namespace paragraph1\phpFCM;
 
 use paragraph1\phpFCM\Recipient\Recipient;
@@ -41,10 +42,10 @@ class Message implements \JsonSerializable
     /**
      * This is just a convenient and generic array for setting additional parameters,
      * instead of adding a new property for each new parameter.
-     * 
+     *
      * @example Example: you can set specific info like android_channel_id or sound. See more at: https://firebase.google.com/docs/cloud-messaging/http-server-ref
      * Usage: $message->setAdditionalParameters('android_channel_id', 'YOUR_CHANNEL_ID');
-     * 
+     *
      * @var array
      */
     private $additionalParameters = [];
@@ -155,16 +156,22 @@ class Message implements \JsonSerializable
     {
         $this->mutableContent = 1;
     }
+
     /**
      * @see https://firebase.google.com/docs/cloud-messaging/concept-options#collapsible_and_non-collapsible_messages
      *
      * @return \paragraph1\phpFCM\Message
      */
-    public function setContentAvailable() {
+    public function setContentAvailable()
+    {
         $this->contentAvailableFlag = TRUE;
         return $this;
     }
 
+    /**
+     * @param array $data
+     * @return $this
+     */
     public function setData(array $data)
     {
         $this->data = $data;
@@ -242,14 +249,22 @@ class Message implements \JsonSerializable
             default:
                 if (count($this->recipients) === 1) {
                     $jsonData['to'] = current($this->recipients)->getIdentifier();
-                } elseif(count($this->recipients) > 1) {
+                } elseif (count($this->recipients) > 1) {
                     $jsonData['registration_ids'] = array();
 
-                    foreach($this->recipients as $recipient) {
+                    foreach ($this->recipients as $recipient) {
                         $jsonData['registration_ids'][] = $recipient->getIdentifier();
                     }
                 }
         }
+    }
+
+    /**
+     * @return array
+     */
+    public function getAdditionalParameters()
+    {
+        return $this->additionalParameters;
     }
 
     /**
@@ -269,14 +284,6 @@ class Message implements \JsonSerializable
         $this->additionalParameters[$key] = $value;
 
         return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getAdditionalParameters()
-    {
-        return $this->additionalParameters;
     }
 
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace paragraph1\phpFCM;
 
 /**
